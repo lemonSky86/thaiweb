@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action="" id="testform" method="post">
+    <input type="text" name="name1">
+    <input type="text" name="name2">
+</form>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script>
+    $(function () {
+            $("#testform").validate({
+                submitHandler: function(form) {
+                    alert("ooook");
+                    form.submit();
+                }
+        });
+    })
+</script>
+</body>
+</html>

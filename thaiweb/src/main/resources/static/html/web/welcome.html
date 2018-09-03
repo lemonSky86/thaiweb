@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /*导航栏*/
+        .navbar-fixed-top{
+            height: 90px;
+            padding-top: 15px;
+        }
+
+        .navbar-fixed-top li{
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dcool_header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <li style="margin-right: 50px;"><a href="#" class="navbar-link">Welcome</a></li>
+                    <li style="margin-right: 50px;"><a href="#" class="navbar-link">Topic</a></li>
+                    <li style="margin-right: 50px;"><a href="#" class="navbar-link">Mark</a></li>
+                    <li style="margin-right: 50px;"><a href="#" class="navbar-link">Mark</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="login-box">
+                    <li><a data-toggle="modal" href="#loginModal">Login</a></li>
+                    <li><a data-toggle="modal" href="#registerModal">Register</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="dcool_content">
+
+    </div>
+    <div class="dcool_treil">
+
+    </div>
+
+    <!--用户注册模态框-->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="registerModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/user/add" id="registerForm" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">User Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail1" placeholder="User Name" name="userName">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="saveUser">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--用户登陆模态框-->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="loginModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/user/login" id="loginForm" method="post">
+                        <div class="form-group">
+                            <label for="exampleInputEmail2">User Name</label>
+                            <input type="text" class="form-control" id="exampleInputEmail2" placeholder="User Name" name="userName">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword2">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password" name="password">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="loginUser">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.validate.js"></script>
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>-->
+    <script src="../../js/main.js"></script>
+    <script>
+        $("#saveUser").click(function(){
+            //表单验证
+            $("#registerForm").validate({
+                debug:false,
+                rules:{
+                    userName:{
+                        required:true,
+                        remote:{
+                            url: "/user/find/",
+                            type: "POST"
+                        }
+                        // success: function (result) {
+                        //     alert(result);
+                        // }
+                    },
+                    password:{
+                        required:true
+                    }
+                },
+                messages:{
+                    userName:{
+                        required:"pl fill user name",
+                        remote:"this user name has been used"
+                    },
+                    password:{
+                        required:"pl fill password"
+                    }
+                }
+                //表单验证成功之后执行的方法,需要使用form.submit()表单才会提交
+                //使用默认的submit控件这不需要此方法
+                // submitHandler:function (form) {
+                //     form.submit();
+                // }
+            });
+            $("#registerForm").submit();
+        });
+
+        $("#loginUser").click(function () {
+            $("#loginForm").validate({
+                rules:{
+                    userName:{
+                        required:true
+                    },
+                    password:{
+                        required:true,
+                        remote:{
+                            url:"user/check/",
+                            type:"POST",
+                            data:{
+                                userName: function () {
+                                    return $(exampleInputEmail2).val();
+                                }
+                            }
+                        }
+                    }
+                },
+                messages:{
+                    userName:{
+                        required:"please fill user name"
+                    },
+                    password:{
+                        required:"please fill password",
+                        remote:"user name or password error, please check!"
+                    }
+                }
+                // errorPlacement:function (error, element) {
+                //     if (element.attr("name") == "fname" || element.attr("name") == "lname")
+                //         error.insertAfter("#exampleInputPassword2");
+                //     else
+                //         error.insertAfter(element);
+                //
+                // }
+            });
+            $("#loginForm").submit();
+        });
+    </script>
+</body>
+</html>

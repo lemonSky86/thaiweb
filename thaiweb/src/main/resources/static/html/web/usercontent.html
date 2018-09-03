@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personnel Page</title>
+    <link rel="stylesheet" href="../../css/main.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/dropzone.css">
+    <style>
+        /*内容块*/
+        .userContainerDiv{
+            width: 80%;
+            height: 50%;
+            margin: 0 auto;
+        }
+
+        /*图片内容块*/
+        .photoDiv{
+            background-color: aquamarine;
+            /*background-image: url(/test.png);*/
+        }
+
+        /*声音内容块*/
+        .musicDiv{
+            padding-top: 52px;
+            background-color: lightskyblue;
+            /*margin: 0 auto;*/
+            /*padding-top: 52px;*/
+        }
+
+        /*drop area样式*/
+        /*.uploadForm{*/
+            /*width: 70%;*/
+            /*height: 300px;*/
+            /*margin: 0 auto;*/
+            /*background-color: aliceblue;*/
+            /*cursor: pointer;*/
+            /*text-align: center;*/
+            /*padding-top: 140px;*/
+        /*}*/
+        .uploadForm{
+            width: 100%;
+            height: 300px;
+            margin: 0 auto;
+            background-color: aliceblue;
+            cursor: pointer;
+            text-align: center;
+            padding-top: 140px;
+        }
+
+        .photoContainerDiv{
+            width: 80%;
+            height: 300px;
+            margin: 0 auto;
+            background-color: aliceblue;
+            /*padding-top: 52px;*/
+        }
+
+        .contentShowDiv{
+            width: 100%;
+            height: 300px;
+            margin: 0 auto;
+        }
+
+        /*存放资源内容div样式*/
+        .contentDiv{
+            width: 100%;
+            height: 300px;
+            margin: 0 auto;
+            /*background-color: #FFFFFF;*/
+            /*display: none;*/
+        }
+
+        /*模糊面具*/
+        .maskDiv{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            padding-top: 52px;
+        }
+
+        .contentLeftDiv{
+            width: 70%;
+            height: 100%;
+            display: inline-block;
+            padding: 1px;
+            overflow: hidden;
+        }
+
+        .contentLeftDiv img{
+            margin: 0 auto;
+        }
+
+        .photoBigger{
+            position: relative;
+            float: right;
+            /*z-index: 999;*/
+            display: none;
+        }
+
+        .contentRightDiv{
+            width: 30%;
+            height: 100%;
+            display: inline-block;
+            overflow: hidden;
+            background-color: bisque;
+            margin-left: -4px;
+        }
+
+        .contentRightDiv a{
+            width: 100%;
+            height: 50%;
+            border: #FFFFFF;
+            padding-top: 65px;
+            border-radius: unset;
+        }
+
+        .musicPlayTopDiv{
+            width: 100%;
+            height: 80%;
+            padding-top: 40px;
+        }
+
+        .musicPlayBottomDiv{
+            width: 100%;
+            height: 20%;
+            margin: 0 auto;
+        }
+
+        .musicDisk{
+            width: 161px;
+            height: 161px;
+            border-radius: 50%; /*变成45%之后动画执行的时候会有一个虚假的动态效果*/
+            background-color: #000000;
+            margin: 0 auto;
+            /*margin-top: 115px;*/
+            /*display: none;*/
+        }
+
+        /*浮动工具栏*/
+        .floatTool{
+            width: 45px;
+            height: 135px;
+            bottom: 0px;
+            right: 0px;
+            position: fixed;
+            background-color: aquamarine;
+        }
+
+        .floatTool button{
+            width: 45px;
+            height: 45px;
+        }
+
+        /*旋转动画*/
+        @keyframes diskRotate{
+            form{
+                transform: rotateZ(0deg);
+                -ms-transform: rotateZ(0deg);
+                -moz-transform: rotateZ(0deg);
+                -webkit-transform: rotateZ(0deg);
+                -o-transform: rotateZ(0deg);
+            }
+            to{
+                transform: rotateZ(360deg);
+                -ms-transform: rotateZ(360deg);
+                -moz-transform: rotateZ(360deg);
+                -webkit-transform: rotateZ(360deg);
+                -o-transform: rotateZ(360deg);
+            }
+        }
+
+        /*chrome*/
+        @-webkit-keyframes diskRotate{
+            form{
+                transform: rotateZ(0deg);
+                -ms-transform: rotateZ(0deg);
+                -moz-transform: rotateZ(0deg);
+                -webkit-transform: rotateZ(0deg);
+                -o-transform: rotateZ(0deg);
+            }
+            to{
+                transform: rotateZ(360deg);
+                -ms-transform: rotateZ(360deg);
+                -moz-transform: rotateZ(360deg);
+                -webkit-transform: rotateZ(360deg);
+                -o-transform: rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dcool_header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav">
+                        <li style="margin-right: 50px;"><a href="#" class="navbar-link">Welcome</a></li>
+                        <li style="margin-right: 50px;"><a href="#" class="navbar-link">Topic</a></li>
+                        <li style="margin-right: 50px;"><a href="#" class="navbar-link">Mark</a></li>
+                        <li style="margin-right: 50px;"><a href="#" class="navbar-link">Mark</a></li>
+                    </ul>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" id="login-box">
+                    <!--<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link" id="userName"></a></p>-->
+                    <!--<p class="navbar-text navbar-right">Signed out <a href="#" class="navbar-link" id="sign-out"></a></p>-->
+                    <!--<li><a data-toggle="modal" href="#loginModal">Login</a></li>-->
+                    <!--<li><a data-toggle="modal" href="#registerModal">Register</a></li>-->
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="dcool_content">
+        <div class="userContainerDiv photoDiv"><!--背景图片Div-->
+            <div class="maskDiv"><!--面具Div-->
+                <div class="photoContainerDiv"><!--内容Div-->
+                    <div class="contentDiv">
+                        <div class="contentLeftDiv" id="photo-left-div">
+                            <span class="photoBigger" id="photo-bigger" data-show="true"><span class="glyphicon glyphicon-resize-full" aria-hidden='true'></span></span>
+                            <form class="uploadForm" id="photoForm"></form>
+                            <div class="contentShowDiv" id="photo-slide">
+                            </div>
+                        </div>
+                        <div class="contentRightDiv" id="photo-right-div">
+                            <a class="btn btn-default" href="#" role="button" id="photo-btn-cancel">Cancel</a>
+                            <a class="btn btn-default" href="#" role="button" id="photo-btn-upload">Upload</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="userContainerDiv musicDiv">
+            <div class="photoContainerDiv">
+                <div class="contentDiv">
+                    <div class="contentLeftDiv">
+                        <form class="uploadForm" id="musicForm"></form>
+                        <div class="contentShowDiv" id="music-list"></div>
+                    </div>
+                    <div class="contentRightDiv">
+                        <a class="btn btn-default" href="#" role="button" id="music-btn-cancel">Cancel</a>
+                        <a class="btn btn-default" href="#" role="button" id="music-btn-upload">Upload</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dcool_treil">
+    </div>
+    <div class="floatTool">
+        <div class="btn-group-vertical" role="group" aria-label="...">
+            <button type="button" id="topicPublish" data-toggle="modal" data-target="#myTopicModal">T</button>
+        </div>
+    </div>
+    <!-- topic 发布 model -->
+    <div class="modal fade" id="myTopicModal" tabindex="-1" role="dialog" aria-labelledby="myTopicModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Topic</h4>
+                </div>
+                <div class="modal-body">
+                    <form action="/topic/save" id="topic-form" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="topic-title" class="control-label">Title:</label>
+                            <input type="text" name="topicTitle" class="form-control" id="topic-title">
+                        </div>
+                        <div class="form-group">
+                            <label for="topic-input-file">File input</label>
+                            <input type="file" name="topicFile" id="topic-input-file" accept="image/*,video/*">
+                            <p class="help-block">Example block-level help text here.</p>
+                            <div class="topicFilePreview" id="topic-file-preview"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="topic-description" class="control-label">Description:</label>
+                            <textarea class="form-control" name="topicDescription" id="topic-description"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" id="topic-publish" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="../../js/jquery.validate.js"></script>
+    <!--Drop Area上传控件-->
+    <script src="../../js/dropzone.js"></script>
+    <script src="../../js/main.js"></script>
+    <script>
+        /**
+          * @Description //查找当前用户是否上传过图片，是则返回查询结果
+          * @Param
+          * @Author oneTi
+          * @Date 14:25 2018/8/20
+          * @Return
+          **/
+        function checkUserPhotoUpload()
+        {
+            $.ajax({
+                url:"/photo/latest",
+                success:function (result) {
+                    if(result.length != 0)
+                    {
+                        $("#photoForm").hide();
+                        $("#photo-bigger").show();
+                        $("#photo-slide").show("normal", function () {
+                            $(this).html("<img src="+ result[0].name +"'/' style='width: 100%;height: 100%;' >");
+                        });
+
+                        $(".photoDiv").css({
+                            "background-image": "url(/" + result[0].name + ")",
+                            "background-size": "100% 100%"
+                        });
+
+                        photoUploadButton();
+                        buttonClick();
+                    }
+                }
+            })
+        }
+
+        /**
+          * @Description //检查图片的上传状态
+          * @Param
+          * @Author oneTi
+          * @Date 9:14 2018/8/22
+          * @Return
+          **/
+        function checkPhotoUploadStatus()
+        {
+            var photoDropzone = new Dropzone("form#photoForm", {
+                url: "/photo/upload",
+                //自定义预览模版 其他相似属性可作参照
+                previewTemplate: "<div class=\"dz-preview dz-file-preview\">" +
+                "<div class=\"dz-details\">" +
+                "    <div class=\"dz-filename\"><span data-dz-name></span></div>" +
+                "    <div class=\"dz-size\" data-dz-size></div>" +
+                "    <img data-dz-thumbnail />" +
+                "  </div>" +
+                "  <div class=\"dz-progress\"><span class=\"dz-upload\" data-dz-uploadprogress></span></div>" +
+                "</div>"
+            });
+            //自定义预览位置 其他相似属性可作参照
+            photoDropzone.previewsContainer = document.getElementById("dropZonePreview");//这里不能使用JQuery选择器
+            //当图片上传成功时执行 其他相似方法可作参考
+            photoDropzone.on("success", function (result) {
+                $.ajax({
+                    url:"/photo/latest",
+                    success:function(result){
+                        // console.log(result[0].name);
+                        // $("#photoForm").hide();
+                        // $("#photo-slide").show("normal", function () {
+                        //     $(this).html("<img src='/"+ result[0].name +"' style='width: 100%;height: 100%;' >");
+                        // });
+                        photoUploadButton(result);
+                    }
+                })
+            });
+        }
+
+        /**
+         * @Description //检查声音上传情况
+         * @Param
+         * @Author oneTi
+         * @Date 9:17 2018/8/22
+         * @Return
+         **/
+        function checkUserMusicUpload()
+        {
+            $.ajax({
+                url:"/music/showfive",
+                success:function (result) {
+                    if (result.length != 0)
+                    {
+                        $("#musicForm").hide();
+                        $("#music-list").show("normal", function () {
+                            //数据填充
+                            var musicList = "<div class='table-responsive'>" +
+                                "<table class='table table-condensed'>" +
+                                "<tr><th>Name</th><th>Date</th><th>Operation</th></tr>";
+                            for (var i = 0; i < result.length; i++)
+                            {
+                                musicList = musicList +
+                                    "<tr>" +
+                                    "<td>" + result[i].name +"</td>" +
+                                    "<td>" + result[i].date + "</td>" +
+                                    "<td><p id='musicPlay' data-music-name='" + result[i].name + "' onclick='musicPlayButton(this)'><span class='glyphicon glyphicon-play' aria-hidden='true'></span></p></td>" +
+                                    "</tr>";
+                            }
+                            $(this).html(musicList + "</table></div>");
+                        });
+                        musicUploadButton();
+                    }
+                }
+            })
+        }
+
+        /**
+         * @Description //检查声音上传状态
+         * @Param
+         * @Author oneTi
+         * @Date 14:15 2018/8/23
+         * @Return
+         **/
+        function checkMusicUploadStatus()
+        {
+            var musicDropzone = new Dropzone("form#musicForm", {
+                url: "/music/upload"
+            });
+            //当声音上传成功时执行
+            musicDropzone.on("success", function (result) {
+                $.ajax({
+                    url:"/music/showfive",
+                    success:function(result){
+                        console.log(result.length);
+                        // $("#musicForm").hide();
+                        // $("#music-list").show("normal", function () {
+                        //     // $("#music-div-left").html("<img src='/"+ result[0].name +"' style='width: 100%;height: 100%;' >");
+                        //     // $("#msuic-div-left").html("" +
+                        //     //     "");
+                        // });
+                    }
+                })
+            });
+        }
+
+        // $("#musicPlay").click(function(event) {
+        //     /* Act on the event */
+        //     $("#musicPlayDisk").show('normal', function() {
+        //         $(this).css({
+        //             'animation-name': 'diskRotate',
+        //             'animation-duration': '5s', /*持续时间*/
+        //             'animation-timing-function': 'linear', /*匀速*/
+        //             'animation-delay': '0s', /*延时播放时间*/
+        //             'animation-iteration-count': 'infinite', /*播放次数 不限*/
+        //             'animation-direction': 'normal', /*是否下一周期逆向播放*/
+        //             'animation-play-state': 'running' /*规定动画播放状态*/
+        //         });
+        //     });
+        // });
+
+        // $("#musicClose").click(function(event) {
+        //     /* Act on the event */
+        //     $("#musicPlayDisk").hide('normal', function() {
+        //         $(this).css({
+        //             'animation-name': 'diskRotate',
+        //             'animation-play-state': 'paused'
+        //         });
+        //     });
+        // });
+
+        /**
+         * @Description //音频播放button
+         * @Param
+         * @Author oneTi
+         * @Date 9:53 2018/8/28
+         * @Return
+         **/
+        function musicPlayButton(music){
+            var musicAudioObject = document.getElementById("musicAudio");
+            if(musicAudioObject.paused == true){//暂停
+                $(music).html("<span class='glyphicon glyphicon-pause' aria-hidden='true'></span>");
+                musicAudioObject.src = "/" + $(music).attr("data-music-name");
+                musicAudioObject.controls = true;
+                musicAudioObject.play();
+            }
+            else{//播放
+                $(music).html("<span class='glyphicon glyphicon-play' aria-hidden='true'></span>");
+                musicAudioObject.pause();
+            }
+        }
+
+        /**
+         * @Description //图片上传button
+         * @Param
+         * @Author oneTi
+         * @Date 9:55 2018/8/28
+         * @Return
+         **/
+        function photoUploadButton(){
+            //上传点击事件绑定
+            $("#photo-btn-upload").on("click", function () {
+                $("#photo-slide").hide("normal", function () {
+                    $("#photoForm").show();
+                });
+            });
+            //上传撤销事件绑定
+            $("#photo-btn-cancel").on("click", function () {
+                $("#photoForm").hide("normal", function () {
+                    $("#photo-slide").show();
+                });
+            });
+        }
+
+        /**
+          * @Description //音频上传Button
+          * @Param
+          * @Author oneTi
+          * @Date 11:53 2018/8/28
+          * @Return
+          **/
+        function musicUploadButton(){
+            //上传点击事件绑定
+            $("#music-btn-upload").on("click", function () {
+                $("#music-list").hide("normal", function () {
+                    $("#musicForm").show();
+                });
+            });
+            //上传撤销事件绑定
+            $("#music-btn-cancel").on("click", function () {
+                $("#musicForm").hide("normal", function () {
+                    $("#music-list").show();
+                });
+            });
+        }
+
+        /**
+          * @Description //图片功能,放大缩小
+          * @Param
+          * @Author oneTi
+          * @Date 13:23 2018/8/28
+          * @Return
+          **/
+        function buttonClick()
+        {
+            //图片
+            $("#photo-bigger").on("click", function () {
+                if($(this).attr("data-show") == "true")
+                {
+                    $(this).html("<span class='glyphicon glyphicon-resize-small'aria-hidden='true'></span>");
+                    $("#photo-right-div").hide();
+                    $(this).attr("data-show", "false");
+                    $("#photo-left-div").css({
+                        "width": "100%"
+                    });
+                }
+                else{
+                    $(this).html("<span class='glyphicon glyphicon-resize-full'aria-hidden='true'></span>");
+                    $("#photo-right-div").show();
+                    $(this).attr("data-show", "true");
+                    $("#photo-left-div").css({
+                        "width": "70%"
+                    });
+                }
+            });
+        }
+
+        /**
+          * @Description //topic发布
+          * @Param
+          * @Author oneTi
+          * @Date 13:03 2018/8/31
+          * @Return
+          **/
+        function topicPublish(){
+
+        }
+
+        //topic publish 表单提交验证
+        $("#topic-publish").click(function () {
+            $("#topic-form").validate({
+                debug:false,
+                rules:{
+                    topicTitle:{
+                        required: true,
+                        maxlength: 30
+                    },
+                    topicFile:{
+                        required: true
+                    },
+                    topicDescription:{
+                        required: true
+                    }
+                },
+                messages:{
+                    topicTitle:{
+                        required: "please fill title!"
+                    },
+                    topicFile:{
+                        required: "please select file!"
+                    },
+                    topicDescription:{
+                        required: "please fill description!"
+                    }
+                }
+            });
+            $("#topic-form").submit();
+        });
+
+        /**
+          * @Description //退出登录
+          * @Param
+          * @Author oneTi
+          * @Date 9:50 2018/9/3
+          * @Return
+          **/
+        // $("#sign-out").click(function () {
+        //     $.ajax({
+        //         url: "/user/login/out",
+        //         method: "POST"
+        //     })
+        // });
+
+        $(function () {
+            //检查用户登陆状态
+            checkUserStatus();
+
+
+
+            //检查用户当前图片上传状态
+            checkUserPhotoUpload();
+            //检查图片上传状态
+            checkPhotoUploadStatus();
+            //检查用户当前声音上传状态
+            checkUserMusicUpload();
+            //检查声音上传状态
+            checkMusicUploadStatus();
+
+            //topic 上传预览
+            $("#topic-input-file").on("change", function () {
+                var fileReader = new FileReader();
+                var topicFile = document.getElementById("topic-input-file").files[0];
+                fileReader.readAsDataURL(topicFile);//readAsDataURL需要在选中文件的时候使用，因此用change方法
+                fileReader.onload = function (ev) {
+                    $("#topic-file-preview").html("<img src='" + this.result +"' width='100%' height='300px'>");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
