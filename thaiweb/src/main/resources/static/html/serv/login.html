@@ -3,10 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>login</title>
-    <#include path="header.html" />
+    <!--<#include path="header.html" />-->
+    <!-- Bootstrap -->
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .loginDiv{
+            width: 360px;
+            height: 240px;
+            margin: 0 auto;
+            border: 1px solid darkcyan;
+            padding: 20px 15px;
+        }
+    </style>
 </head>
 <body>
-
-    <#include path="tail.html" />
+    <div class="loginDiv">
+        <form>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></div>
+                    <input type="email" class="form-control" id="username" placeholder="User Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
+                    <input type="password" class="form-control" id="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                <label>
+                    <input type="checkbox"> Remember me
+                </label>
+            </div>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+            </div>
+        </form>
+    </div>
+    <!--<#include path="tail.html" />-->
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>
