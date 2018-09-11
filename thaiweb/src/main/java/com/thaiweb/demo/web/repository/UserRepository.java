@@ -43,26 +43,6 @@ public interface UserRepository extends JpaRepository<UserInfo, Long> {
     UserInfo getUserInfoByUserNameAndPassword(String userName, String password);
 
     /**
-      * @Description //按姓名查找单个用户 使用Query注解方式
-      * @Param
-      * @Author oneTi
-      * @Date 14:47 2018/8/7
-      * @Return
-      **/
-//    @Query("select u from UserInfo u where u.userName = ?1")
-//    UserInfo findUserInfoByName(String userName);
-
-    /**
-      * @Description //按姓名查找单个用户 使用原生查询方式
-      * @Param
-      * @Author oneTi
-      * @Date 14:54 2018/8/7
-      * @Return
-      **/
-//    @Query(value = "SELECT * FROM USER_INFO WHERE USER_NAME = ?1", nativeQuery = true)
-//    UserInfo findUserInfoByName(String userName);
-
-    /**
       * @Description //根据名称删除用户
       * @Param
       * @Author oneTi

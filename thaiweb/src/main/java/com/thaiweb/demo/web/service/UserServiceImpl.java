@@ -1,7 +1,7 @@
 package com.thaiweb.demo.web.service;
 
 import com.thaiweb.demo.web.domain.UserInfo;
-import com.thaiweb.demo.serv.repository.UserRepository;
+import com.thaiweb.demo.web.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

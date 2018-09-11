@@ -1,7 +1,7 @@
 package com.thaiweb.demo.web.service;
 
 import com.thaiweb.demo.web.domain.MusicInfo;
-import com.thaiweb.demo.serv.repository.MusicRepository;
+import com.thaiweb.demo.web.repository.MusicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

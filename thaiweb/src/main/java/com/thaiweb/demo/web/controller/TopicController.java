@@ -74,7 +74,6 @@ public class TopicController extends BaseController {
     @RequestMapping("/topic/showten")
     @ResponseBody
     public List<TopicInfo> showTopTenByAgreeDesc(){
-//        List<TopicInfo> topicInfosList = topicService.findTopTenByAgreeDesc();
         return topicService.findTopTenByAgreeDesc();
     }
 }

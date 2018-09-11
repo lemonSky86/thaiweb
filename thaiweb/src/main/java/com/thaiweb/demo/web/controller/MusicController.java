@@ -35,10 +35,10 @@ public class MusicController extends BaseController {
     UserService userService;
 
     /**
-     * @Description //保存文件
+     * @Description //TODO
      * @Param [multipartFile]
      * @Author oneTi
-     * @Date 16:02 2018/8/21
+     * @Date 9:17 2018/9/11
      * @Return java.lang.String
      **/
     @RequestMapping("/music/upload")
@@ -60,13 +60,6 @@ public class MusicController extends BaseController {
         return null;
     }
 
-    /**
-     * @Description //显示Top5
-     * @Param []
-     * @Author oneTi
-     * @Date 17:29 2018/8/21
-     * @Return java.util.List<MusicInfo>
-     **/
     @RequestMapping("/music/showfive")
     @ResponseBody
     public List<MusicInfo> showTopFive(){

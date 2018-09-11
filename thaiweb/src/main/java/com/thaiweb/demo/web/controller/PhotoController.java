@@ -103,14 +103,6 @@ public class PhotoController extends BaseController {
     @ResponseBody
     public List<PhotoInfo> showLatestPhoto()
     {
-//        UserInfo userInfo = (UserInfo) request.getSession().getAttribute("userInfo");
-//        if(userInfo != null)
-//        {
-//            List<PhotoInfo> photoList = photoService.findLatestPhotoByUserId(userInfo.getId());
-//            return  photoList;
-//        }
-//        return null;
-
         Subject currentUser = SecurityUtils.getSubject();//shiro获取当前用户
         UserInfo userInfo = userService.findUserInfoByUserName(currentUser.getPrincipal().toString());
         if(currentUser.isAuthenticated()){

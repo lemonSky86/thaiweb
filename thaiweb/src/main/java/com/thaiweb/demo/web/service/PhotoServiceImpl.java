@@ -2,7 +2,7 @@ package com.thaiweb.demo.web.service;
 
 import com.thaiweb.demo.web.domain.PhotoInfo;
 import com.thaiweb.demo.web.domain.UserInfo;
-import com.thaiweb.demo.serv.repository.PhotoRepository;
+import com.thaiweb.demo.web.repository.PhotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -40,9 +40,4 @@ public class PhotoServiceImpl implements PhotoService {
             photoRepository.save(photoInfo);
         }
     }
-
-//    public List<PhotoInfo> findLatestPhotoByUserInfo(UserInfo userInfo)
-//    {
-//        return photoRepository.findPhotoInfoByToUserAOrderByDateDesc(userInfo);
-//    }
 }

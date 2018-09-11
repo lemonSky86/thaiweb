@@ -1,7 +1,7 @@
 package com.thaiweb.demo.web.util;
 
-import com.thaiweb.demo.serv.repository.UserRepository;
 import com.thaiweb.demo.web.domain.UserInfo;
+import com.thaiweb.demo.web.repository.UserRepository;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;

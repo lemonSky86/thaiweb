@@ -40,8 +40,6 @@ public class UserController extends BaseController {
     @RequestMapping("/user/login")
     public String login(String userName, String password)
     {
-//        UserInfo userInfo = userService.findUserInfoByUserName(userName);
-//        request.getSession().setAttribute("userInfo", userInfo); //将用户信息保存到session
 
 //        shiro改造
         //用户信息收集
