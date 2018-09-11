@@ -139,11 +139,6 @@ public class UserController extends BaseController {
     @ResponseBody
     public UserInfo checkUserStatus()
     {
-//        if(UserThreadLocalUtil.getUser() != null)
-//        {
-//            System.out.println("UserController-->>>checkUserStatus()" + UserThreadLocalUtil.getUser());
-//            return UserThreadLocalUtil.getUser();
-//        }
         Subject currentUser = SecurityUtils.getSubject();
         System.out.println("====currentUser.isAuthenticated()===>>>" + currentUser.isAuthenticated());
         if (currentUser.isAuthenticated())
