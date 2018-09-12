@@ -1,7 +1,9 @@
 package com.thaiweb.demo.serv.util;
 
-import com.thaiweb.demo.web.domain.UserInfo;
-import com.thaiweb.demo.web.repository.UserRepository;
+import com.thaiweb.demo.serv.domain.ManagerInfo;
+import com.thaiweb.demo.serv.service.ManagerService;
+import com.thaiweb.demo.serv.domain.UserInfo;
+import com.thaiweb.demo.serv.repository.UserRepository;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
@@ -19,6 +21,8 @@ public class UserRealmUtil extends AuthorizingRealm {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private ManagerService managerService;
 
     /**
      * @Description //用户认证
@@ -28,14 +32,16 @@ public class UserRealmUtil extends AuthorizingRealm {
      * @Return org.apache.shiro.authc.AuthenticationInfo
      **/
     public AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken){
-//        UsernamePasswordToken usernamePasswordToken = (UsernamePasswordToken) authenticationToken;
-//        String userName = usernamePasswordToken.getUsername();
         String userName = authenticationToken.getPrincipal().toString();//用户账号
-        System.out.println("====username====-1111->>>");
-        UserInfo user = userRepository.getUserInfoByUserName(userName);
-        if (user != null)
+        if (userRepository.getUserInfoByUserName(userName) != null)
         {
-            return new SimpleAuthenticationInfo(user.getUserName(), user.getPassword(), getName());
+            UserInfo user = userRepository.getUserInfoByUserName(userName);
+            //接收账户主体及其凭据，这里就会给出验证结果
+            return new SimpleAuthenticationInfo(user.getUsername(), user.getPassword(), getName());
+        }
+        else if(managerService.findManagerInfoByUsername(userName) != null){
+            ManagerInfo manager = managerService.findManagerInfoByUsername(userName);
+            return new SimpleAuthenticationInfo(manager.getUsername(), manager.getPassword(), getName());
         }
         return null;
     }

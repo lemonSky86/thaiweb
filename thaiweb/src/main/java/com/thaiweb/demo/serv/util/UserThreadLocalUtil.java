@@ -1,6 +1,6 @@
 package com.thaiweb.demo.serv.util;
 
-import com.thaiweb.demo.web.domain.UserInfo;
+import com.thaiweb.demo.serv.domain.UserInfo;
 
 /**
  * @author oneTi

@@ -1,11 +1,13 @@
-package com.thaiweb.demo.web.controller;
+package com.thaiweb.demo.serv.controller;
 
-import com.thaiweb.demo.web.domain.UserInfo;
-import com.thaiweb.demo.web.service.UserService;
+import com.thaiweb.demo.web.controller.BaseController;
+import com.thaiweb.demo.serv.domain.UserInfo;
+import com.thaiweb.demo.serv.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -69,6 +71,12 @@ public class UserController extends BaseController {
             return null;
         }
 //        return "usercontent";
+    }
+
+    @RequestMapping("/user/query/all")
+    public String showAll(Pageable pageable){
+        request.setAttribute("UserInfos", userService.findAll(pageable));
+        return null;
     }
 
     /**

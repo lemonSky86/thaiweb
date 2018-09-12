@@ -1,7 +1,7 @@
 package com.thaiweb.demo.web.repository;
 
 import com.thaiweb.demo.web.domain.PhotoInfo;
-import com.thaiweb.demo.web.domain.UserInfo;
+import com.thaiweb.demo.serv.domain.UserInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

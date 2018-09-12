@@ -1,9 +1,9 @@
 package com.thaiweb.demo.web.controller;
 
 import com.thaiweb.demo.web.domain.TopicInfo;
-import com.thaiweb.demo.web.domain.UserInfo;
+import com.thaiweb.demo.serv.domain.UserInfo;
 import com.thaiweb.demo.web.service.TopicService;
-import com.thaiweb.demo.web.service.UserService;
+import com.thaiweb.demo.serv.service.UserService;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;

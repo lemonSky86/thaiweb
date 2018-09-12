@@ -1,4 +1,4 @@
-package com.thaiweb.demo.web.repository;
+package com.thaiweb.demo.serv.repository;
 
 /**
  * @author jmaes.feng

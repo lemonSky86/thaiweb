@@ -1,6 +1,6 @@
 package com.thaiweb.demo.serv.listener;
 
-import com.thaiweb.demo.web.domain.UserInfo;
+import com.thaiweb.demo.serv.domain.UserInfo;
 import com.thaiweb.demo.serv.util.UserThreadLocalUtil;
 
 import javax.servlet.annotation.WebListener;

@@ -1,9 +1,14 @@
-package com.thaiweb.demo.web.service;
+package com.thaiweb.demo.serv.service;
 
-import com.thaiweb.demo.web.domain.UserInfo;
-import com.thaiweb.demo.web.repository.UserRepository;
+import com.thaiweb.demo.serv.domain.UserInfo;
+import com.thaiweb.demo.serv.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author jmaes.feng
@@ -42,5 +47,21 @@ public class UserServiceImpl implements UserService {
     public UserInfo findUserInfoByUserNameAndPassword(String userName, String password)
     {
         return userRepository.getUserInfoByUserNameAndPassword(userName, password);
+    }
+
+    /**
+     * @Description //TODO
+     * @Param []
+     * @Author oneTi
+     * @Date 15:08 2018/9/12
+     * @Return java.util.List<com.thaiweb.demo.serv.domain.UserInfo>
+     **/
+    @Override
+    public List<UserInfo> findAllIdNotNull() {
+        return userRepository.findAllByIdNotNull();
+    }
+
+    public Page<UserInfo> findAll(Pageable pageable){
+        return userRepository.findAll(pageable);
     }
 }

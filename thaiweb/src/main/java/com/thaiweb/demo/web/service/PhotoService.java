@@ -1,7 +1,7 @@
 package com.thaiweb.demo.web.service;
 
 import com.thaiweb.demo.web.domain.PhotoInfo;
-import com.thaiweb.demo.web.domain.UserInfo;
+import com.thaiweb.demo.serv.domain.UserInfo;
 
 import java.util.List;
 

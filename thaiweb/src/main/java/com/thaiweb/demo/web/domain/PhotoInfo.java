@@ -1,5 +1,7 @@
 package com.thaiweb.demo.web.domain;
 
+import com.thaiweb.demo.serv.domain.UserInfo;
+
 import javax.persistence.*;
 import java.util.Date;
 

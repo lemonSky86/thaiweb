@@ -1,7 +1,7 @@
 package com.thaiweb.demo.web.filter;
 
 
-import com.thaiweb.demo.web.domain.UserInfo;
+import com.thaiweb.demo.serv.domain.UserInfo;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

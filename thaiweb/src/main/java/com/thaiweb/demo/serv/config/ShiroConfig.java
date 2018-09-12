@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * @Description: TODO
+ * @Description: shiro 配置
  * @Author oneTi
  * @Date 2018/8/3017:13
  */
@@ -25,6 +25,7 @@ public class ShiroConfig {
     @Bean
     public ShiroFilterChainDefinition shiroFilterChainDefinition(){
         DefaultShiroFilterChainDefinition chainDefinition = new DefaultShiroFilterChainDefinition();
+        //anon: 允许匿名访问; authc认证通过才可以访问
         chainDefinition.addPathDefinition("/**", "anon");
         return chainDefinition;
     }

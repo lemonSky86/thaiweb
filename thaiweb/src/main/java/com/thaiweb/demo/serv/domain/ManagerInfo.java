@@ -1,21 +1,18 @@
 package com.thaiweb.demo.serv.domain;
 
-import com.thaiweb.demo.serv.domain.RoleInfo;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author jmaes.feng
- * @Description: TODO
- * @date 2018/8/613:25
+ * @Description: 用户实体
+ * @Author oneTi
+ * @Date 2018/9/119:50
  */
 @Entity
-public class UserInfo implements Serializable {
+public class ManagerInfo {
 
     @Id
     @GeneratedValue

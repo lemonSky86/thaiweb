@@ -1,5 +1,7 @@
 package com.thaiweb.demo.web.domain;
 
+import com.thaiweb.demo.serv.domain.UserInfo;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
